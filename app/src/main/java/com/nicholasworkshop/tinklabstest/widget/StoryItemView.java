@@ -3,7 +3,6 @@ package com.nicholasworkshop.tinklabstest.widget;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,7 +23,7 @@ public class StoryItemView extends LinearLayout {
 
     @BindView(R.id.title) TextView titleTextView;
     @BindView(R.id.summary) TextView summaryTextView;
-    @BindView(R.id.feature) ImageView featureTextView;
+    @BindView(R.id.feature) ImageView featureImageView;
 
     @Inject RequestManager requestManager;
 
@@ -56,6 +55,6 @@ public class StoryItemView extends LinearLayout {
     }
 
     public void setFeatureImageUrl(String featureImageUrl) {
-        requestManager.load(featureImageUrl).into(featureTextView);
+        requestManager.load(featureImageUrl).into(featureImageView);
     }
 }
