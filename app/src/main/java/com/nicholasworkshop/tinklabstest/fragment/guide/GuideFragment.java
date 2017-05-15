@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.nicholasworkshop.tinklabstest.MainApplication;
 import com.nicholasworkshop.tinklabstest.MainComponent;
+import com.nicholasworkshop.tinklabstest.external.ads.model.Ad;
 import com.nicholasworkshop.tinklabstest.external.content.model.Story;
 
 import java.util.List;
@@ -55,6 +56,12 @@ public class GuideFragment extends Fragment {
             @Override
             public void accept(@NonNull List<Story> stories) throws Exception {
                 guideView.setStoryList(stories);
+            }
+        });
+        guideModel.ads().subscribe(new Consumer<List<Ad>>() {
+            @Override
+            public void accept(@NonNull List<Ad> ads) throws Exception {
+                guideView.setAdList(ads);
             }
         });
     }

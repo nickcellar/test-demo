@@ -1,6 +1,7 @@
 package com.nicholasworkshop.tinklabstest.fragment.guide;
 
 import com.nicholasworkshop.tinklabstest.external.ads.AdsService;
+import com.nicholasworkshop.tinklabstest.external.ads.model.Ad;
 import com.nicholasworkshop.tinklabstest.external.content.ContentService;
 import com.nicholasworkshop.tinklabstest.external.content.model.Story;
 
@@ -34,7 +35,10 @@ public class GuideModel {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    Observable<List<Story>> ads() {
-        return null;
+    Observable<List<Ad>> ads() {
+        return adsService
+                .get()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 }

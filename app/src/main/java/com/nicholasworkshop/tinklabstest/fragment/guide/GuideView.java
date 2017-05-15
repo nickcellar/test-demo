@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.nicholasworkshop.tinklabstest.R;
+import com.nicholasworkshop.tinklabstest.external.ads.model.Ad;
 import com.nicholasworkshop.tinklabstest.external.content.model.Story;
 
 import java.util.List;
@@ -41,5 +42,9 @@ public class GuideView {
 
     void setStoryList(List<Story> storyList) {
         guideRecyclerViewAdapter.setStoryList(storyList);
+    }
+
+    void setAdList(List<Ad> adList) {
+        guideRecyclerViewAdapter.setAdList(adList);
     }
 }

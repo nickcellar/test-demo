@@ -1,6 +1,8 @@
 package com.nicholasworkshop.tinklabstest.external.ads;
 
-import com.nicholasworkshop.tinklabstest.external.content.model.Story;
+import com.nicholasworkshop.tinklabstest.external.ads.model.Ad;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -11,6 +13,6 @@ import retrofit2.http.GET;
 
 public interface AdsService {
 
-    @GET("all.json")
-    Observable<Story> getAll();
+    @GET("data.json")
+    Observable<List<Ad>> get();
 }
