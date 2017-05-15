@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.nicholasworkshop.tinklabstest.fragment.PlaceholderFragment;
+import com.nicholasworkshop.tinklabstest.fragment.guide.GuideFragment;
 
 /**
  * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -20,6 +21,9 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         // getItem is called to instantiate the fragment for the given page.
         // Return a PlaceholderFragment (defined as a static inner class below).
+        if (position == 0) {
+            return GuideFragment.newInstance();
+        }
         return PlaceholderFragment.newInstance(position + 1);
     }
 
