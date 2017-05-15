@@ -67,6 +67,7 @@ public class AdItemView extends FrameLayout {
             Uri uri = Uri.parse(redirectUrl);
             Intent intent = new Intent();
             intent.setData(uri);
+            intent.setAction(Intent.ACTION_VIEW);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             getContext().startActivity(intent);
         }
