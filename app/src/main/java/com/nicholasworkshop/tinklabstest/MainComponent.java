@@ -5,6 +5,7 @@ import com.nicholasworkshop.tinklabstest.external.ads.AdsService;
 import com.nicholasworkshop.tinklabstest.external.ads.AdsServiceModule;
 import com.nicholasworkshop.tinklabstest.external.content.ContentServiceModule;
 import com.nicholasworkshop.tinklabstest.fragment.PlaceholderFragment;
+import com.nicholasworkshop.tinklabstest.widget.StoryItemView;
 
 import javax.inject.Singleton;
 
@@ -24,4 +25,6 @@ public interface MainComponent {
     void inject(MainActivity mainActivity);
 
     void inject(PlaceholderFragment placeholderFragment);
+
+    void inject(StoryItemView storyItemView);
 }
