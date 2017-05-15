@@ -17,6 +17,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+    }
 }
 
 dependencies {
@@ -30,6 +33,8 @@ dependencies {
     // dagger2
     compile 'com.google.dagger:dagger:2.10'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.10'
+
+    provided "org.projectlombok:lombok:1.12.6"
 
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
