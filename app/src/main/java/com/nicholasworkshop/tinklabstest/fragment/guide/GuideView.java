@@ -64,7 +64,8 @@ public class GuideView {
     }
 
     private class GuideInfiniteScrollListener extends InfiniteScrollListener {
-        public GuideInfiniteScrollListener(int maxItemsPerRequest, LinearLayoutManager layoutManager) {
+
+        GuideInfiniteScrollListener(int maxItemsPerRequest, LinearLayoutManager layoutManager) {
             super(maxItemsPerRequest, layoutManager);
         }
 

@@ -34,12 +34,7 @@ public class GuideModel {
         return contentService
                 .getGuide()
                 .cache()
-                .map(new Function<List<Story>, List<Story>>() {
-                    @Override
-                    public List<Story> apply(@NonNull List<Story> stories) throws Exception {
-                        return stories.subList(0, Math.min(stories.size(), count));
-                    }
-                })
+                .map(stories -> stories.subList(0, Math.min(stories.size(), count)))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

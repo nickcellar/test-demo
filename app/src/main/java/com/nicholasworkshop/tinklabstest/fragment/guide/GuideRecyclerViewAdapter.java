@@ -20,7 +20,6 @@ import javax.inject.Inject;
  */
 public class GuideRecyclerViewAdapter extends RecyclerView.Adapter {
 
-
     private static final int TYPE_AD = 0;
     private static final int TYPE_STORY = 1;
 

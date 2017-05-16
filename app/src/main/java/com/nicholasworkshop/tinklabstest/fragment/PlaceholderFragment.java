@@ -75,12 +75,9 @@ public class PlaceholderFragment extends Fragment {
                 .getGuide()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<Story>>() {
-                    @Override
-                    public void accept(@NonNull List<Story> stories) throws Exception {
-                        for (Story story : stories) {
-                            textView.append("\n" + story.getTitle());
-                        }
+                .subscribe(stories -> {
+                    for (Story story : stories) {
+                        textView.append("\n" + story.getTitle());
                     }
                 });
         return rootView;
