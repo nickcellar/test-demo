@@ -19,6 +19,7 @@ class GuidePresenter {
 
     private final GuideView guideView;
     private final GuideModel guideModel;
+    private boolean storyFetching = true;
 
     @Inject
     GuidePresenter(GuideView guideView, GuideModel guideModel) {
@@ -33,10 +34,14 @@ class GuidePresenter {
     void viewCreated(View view, @Nullable Bundle savedInstanceState) {
         guideModel
                 .storyList(INITIAL_STORY_COUNT)
+                .doOnNext(stories -> storyFetching = false)
                 .subscribe(guideView::setStoryList);
         guideView
                 .storyRequests()
+                .filter(integer -> !storyFetching)
+                .doOnNext(stories -> storyFetching = true)
                 .flatMap(firstVisibleItemPosition -> guideModel.storyList(firstVisibleItemPosition + FETCH_STORY_COUNT))
+                .doOnNext(stories -> storyFetching = false)
                 .subscribe(guideView::setStoryList);
         guideModel
                 .ads()
