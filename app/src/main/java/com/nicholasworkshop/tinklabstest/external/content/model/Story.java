@@ -1,6 +1,8 @@
 package com.nicholasworkshop.tinklabstest.external.content.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Builder;
 
 /**
@@ -8,6 +10,8 @@ import lombok.experimental.Builder;
  */
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor(suppressConstructorProperties = true)
 public class Story {
 
     private String title;

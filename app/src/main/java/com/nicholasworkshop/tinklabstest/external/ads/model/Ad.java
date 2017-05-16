@@ -1,6 +1,8 @@
 package com.nicholasworkshop.tinklabstest.external.ads.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Builder;
 
 /**
@@ -8,6 +10,8 @@ import lombok.experimental.Builder;
  */
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor(suppressConstructorProperties = true)
 public class Ad {
 
     private String imageUrl;
