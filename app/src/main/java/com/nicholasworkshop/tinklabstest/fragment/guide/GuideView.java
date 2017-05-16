@@ -3,10 +3,12 @@ package com.nicholasworkshop.tinklabstest.fragment.guide;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.pwittchen.infinitescroll.library.InfiniteScrollListener;
 import com.nicholasworkshop.tinklabstest.R;
 import com.nicholasworkshop.tinklabstest.external.ads.model.Ad;
 import com.nicholasworkshop.tinklabstest.external.content.model.Story;
@@ -17,6 +19,10 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Observable;
+import io.reactivex.subjects.BehaviorSubject;
+import io.reactivex.subjects.PublishSubject;
+import io.reactivex.subjects.Subject;
 
 /**
  * Created by nicholas.wong on 2017/05/15.
@@ -32,11 +38,14 @@ public class GuideView {
         this.guideRecyclerViewAdapter = guideRecyclerViewAdapter;
     }
 
-    View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    View createView(LayoutInflater inflater, ViewGroup container) {
         View view = inflater.inflate(R.layout.fragment_guide, container, false);
         ButterKnife.bind(this, view);
-        storiesRecyclerView.setLayoutManager(new LinearLayoutManager(container.getContext()));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(container.getContext());
+        storiesRecyclerView.setHasFixedSize(true);
+        storiesRecyclerView.setLayoutManager(layoutManager);
         storiesRecyclerView.setAdapter(guideRecyclerViewAdapter);
+        storiesRecyclerView.addOnScrollListener(new GuideInfiniteScrollListener(1, layoutManager));
         return view;
     }
 
@@ -46,5 +55,23 @@ public class GuideView {
 
     void setAdList(List<Ad> adList) {
         guideRecyclerViewAdapter.setAdList(adList);
+    }
+
+    private Subject<Integer> storyRequestSubject = BehaviorSubject.create();
+
+    Observable<Integer> storyRequests() {
+        return storyRequestSubject;
+    }
+
+    private class GuideInfiniteScrollListener extends InfiniteScrollListener {
+        public GuideInfiniteScrollListener(int maxItemsPerRequest, LinearLayoutManager layoutManager) {
+            super(maxItemsPerRequest, layoutManager);
+        }
+
+        @Override
+        public void onScrolledToEnd(int firstVisibleItemPosition) {
+            Log.d("dsafsdaf", "fdsafsadf" + firstVisibleItemPosition);
+            storyRequestSubject.onNext(firstVisibleItemPosition);
+        }
     }
 }

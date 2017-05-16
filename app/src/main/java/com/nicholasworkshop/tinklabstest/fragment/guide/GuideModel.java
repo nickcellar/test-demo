@@ -11,6 +11,8 @@ import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -23,14 +25,21 @@ public class GuideModel {
     private final ContentService contentService;
 
     @Inject
-    public GuideModel(AdsService adsService, ContentService contentService) {
+    GuideModel(AdsService adsService, ContentService contentService) {
         this.adsService = adsService;
         this.contentService = contentService;
     }
 
-    Observable<List<Story>> storyList() {
+    Observable<List<Story>> storyList(final int count) {
         return contentService
                 .getGuide()
+                .cache()
+                .map(new Function<List<Story>, List<Story>>() {
+                    @Override
+                    public List<Story> apply(@NonNull List<Story> stories) throws Exception {
+                        return stories.subList(0, Math.min(stories.size(), count));
+                    }
+                })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
