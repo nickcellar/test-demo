@@ -1,7 +1,9 @@
 package com.nicholasworkshop.tinklabstest.fragment.guide;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.nicholasworkshop.tinklabstest.R;
@@ -20,11 +22,13 @@ import javax.inject.Inject;
  */
 public class GuideRecyclerViewAdapter extends RecyclerView.Adapter {
 
-    private static final int TYPE_AD = 0;
-    private static final int TYPE_STORY = 1;
+    static final int TYPE_AD = 0;
+    static final int TYPE_STORY = 1;
 
     private final LayoutInflater layoutInflater;
 
+    private int adOffset = 1;
+    private int adInterval = 5;
     private List<Ad> adList;
     private List<Story> storyList;
 
@@ -35,18 +39,17 @@ public class GuideRecyclerViewAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemViewType(int position) {
-        return position != 0 && position % 3 == 0 ? TYPE_AD : TYPE_STORY;
+        return position % adInterval == adOffset ? TYPE_AD : TYPE_STORY;
     }
+
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_AD) {
-            return new RecyclerView.ViewHolder(layoutInflater.inflate(R.layout.view_item_ad, parent, false)) {
-            };
+            return new RecyclerViewHolder(layoutInflater.inflate(R.layout.view_item_ad, parent, false));
 
         } else if (viewType == TYPE_STORY) {
-            return new RecyclerView.ViewHolder(layoutInflater.inflate(R.layout.view_item_story, parent, false)) {
-            };
+            return new RecyclerViewHolder(layoutInflater.inflate(R.layout.view_item_story, parent, false));
         }
         throw new RuntimeException();
     }
@@ -66,9 +69,10 @@ public class GuideRecyclerViewAdapter extends RecyclerView.Adapter {
             }
             return;
         } else if (viewType == TYPE_STORY) {
-            Story story = storyList.get(position - position / 4);
+            Log.d("fdsfas", position + "=>" + getStoryListIndex(position) + " size:" + storyList.size() + " count:" + getItemCount());
+            Story story = storyList.get(getStoryListIndex(position));
             StoryItemView view = (StoryItemView) holder.itemView;
-            view.setTitle(story.getTitle());
+            view.setTitle(position + "=>" + getStoryListIndex(position) + ": " + story.getTitle());
             view.setSummary(story.getSummary());
             view.setFeatureImageUrl(story.getFeatureImageUrl());
             return;
@@ -79,7 +83,7 @@ public class GuideRecyclerViewAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemCount() {
         int storyCount = storyList != null ? storyList.size() : 0;
-        int adCount = (int) Math.floor(((double) (storyList != null ? storyList.size() : 1)) / 3);
+        int adCount = storyCount / adInterval;
         return storyCount + adCount;
     }
 
@@ -91,5 +95,15 @@ public class GuideRecyclerViewAdapter extends RecyclerView.Adapter {
     void setAdList(List<Ad> adList) {
         this.adList = adList;
         notifyDataSetChanged();
+    }
+
+    int getStoryListIndex(int position) {
+        return position - position / adInterval - 1 + (position % adInterval == 0 ? 1 : 0);
+    }
+
+    public static class RecyclerViewHolder extends RecyclerView.ViewHolder {
+        public RecyclerViewHolder(View itemView) {
+            super(itemView);
+        }
     }
 }

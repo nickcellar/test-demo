@@ -1,9 +1,7 @@
 package com.nicholasworkshop.tinklabstest.fragment.guide;
 
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +19,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Observable;
 import io.reactivex.subjects.BehaviorSubject;
-import io.reactivex.subjects.PublishSubject;
 import io.reactivex.subjects.Subject;
 
 /**
@@ -30,8 +27,11 @@ import io.reactivex.subjects.Subject;
 public class GuideView {
 
     private final GuideRecyclerViewAdapter guideRecyclerViewAdapter;
+    private final Subject<Integer> storyRequestSubject = BehaviorSubject.create();
 
     @BindView(R.id.stories) RecyclerView storiesRecyclerView;
+
+    private LinearLayoutManager layoutManager;
 
     @Inject
     GuideView(GuideRecyclerViewAdapter guideRecyclerViewAdapter) {
@@ -41,7 +41,7 @@ public class GuideView {
     View createView(LayoutInflater inflater, ViewGroup container) {
         View view = inflater.inflate(R.layout.fragment_guide, container, false);
         ButterKnife.bind(this, view);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(container.getContext());
+        layoutManager = new LinearLayoutManager(container.getContext());
         storiesRecyclerView.setHasFixedSize(true);
         storiesRecyclerView.setLayoutManager(layoutManager);
         storiesRecyclerView.setAdapter(guideRecyclerViewAdapter);
@@ -57,8 +57,6 @@ public class GuideView {
         guideRecyclerViewAdapter.setAdList(adList);
     }
 
-    private Subject<Integer> storyRequestSubject = BehaviorSubject.create();
-
     Observable<Integer> storyRequests() {
         return storyRequestSubject;
     }
@@ -71,8 +69,7 @@ public class GuideView {
 
         @Override
         public void onScrolledToEnd(int firstVisibleItemPosition) {
-            Log.d("dsafsdaf", "fdsafsadf" + firstVisibleItemPosition);
-            storyRequestSubject.onNext(firstVisibleItemPosition);
+            storyRequestSubject.onNext(layoutManager.findLastVisibleItemPosition());
         }
     }
 }
