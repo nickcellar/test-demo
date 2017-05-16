@@ -10,8 +10,7 @@ import retrofit2.http.GET;
 /**
  * Created by nicholas.wong on 2017/05/15.
  */
-
-public interface AdsService {
+interface AdsService {
 
     @GET("data.json")
     Observable<List<Ad>> get();

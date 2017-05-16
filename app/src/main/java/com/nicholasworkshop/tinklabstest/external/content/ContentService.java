@@ -10,8 +10,7 @@ import retrofit2.http.GET;
 /**
  * Created by nicholas.wong on 2017/05/15.
  */
-
-public interface ContentService {
+interface ContentService {
 
     @GET("guide.json")
     Observable<List<Story>> getGuide();

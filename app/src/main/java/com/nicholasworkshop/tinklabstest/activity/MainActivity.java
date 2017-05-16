@@ -16,8 +16,6 @@ import android.view.View;
 import com.nicholasworkshop.tinklabstest.MainApplication;
 import com.nicholasworkshop.tinklabstest.MainComponent;
 import com.nicholasworkshop.tinklabstest.R;
-import com.nicholasworkshop.tinklabstest.external.ads.AdsService;
-import com.nicholasworkshop.tinklabstest.external.content.ContentService;
 import com.nicholasworkshop.tinklabstest.widget.SectionsPagerAdapter;
 
 import javax.inject.Inject;
@@ -40,12 +38,6 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager mViewPager;
 
     private MainComponent component;
-
-    @Inject
-    ContentService contentService;
-
-    @Inject
-    AdsService adsService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,7 +1,5 @@
 package com.nicholasworkshop.tinklabstest.external.ads;
 
-import com.nicholasworkshop.tinklabstest.external.content.ContentService;
-
 import javax.inject.Singleton;
 
 import dagger.Module;
