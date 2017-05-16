@@ -1,15 +1,14 @@
 package com.nicholasworkshop.tinklabstest.fragment.guide;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.nicholasworkshop.tinklabstest.R;
 import com.nicholasworkshop.tinklabstest.external.ads.model.Ad;
 import com.nicholasworkshop.tinklabstest.external.content.model.Story;
 import com.nicholasworkshop.tinklabstest.widget.AdItemView;
+import com.nicholasworkshop.tinklabstest.widget.RecyclerViewHolder;
 import com.nicholasworkshop.tinklabstest.widget.StoryItemView;
 
 import java.util.List;
@@ -42,7 +41,6 @@ public class GuideRecyclerViewAdapter extends RecyclerView.Adapter {
         return position % adInterval == adOffset ? TYPE_AD : TYPE_STORY;
     }
 
-
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_AD) {
@@ -69,10 +67,9 @@ public class GuideRecyclerViewAdapter extends RecyclerView.Adapter {
             }
             return;
         } else if (viewType == TYPE_STORY) {
-            Log.d("fdsfas", position + "=>" + getStoryListIndex(position) + " size:" + storyList.size() + " count:" + getItemCount());
             Story story = storyList.get(getStoryListIndex(position));
             StoryItemView view = (StoryItemView) holder.itemView;
-            view.setTitle(position + "=>" + getStoryListIndex(position) + ": " + story.getTitle());
+            view.setTitle(story.getTitle());
             view.setSummary(story.getSummary());
             view.setFeatureImageUrl(story.getFeatureImageUrl());
             return;
@@ -97,13 +94,35 @@ public class GuideRecyclerViewAdapter extends RecyclerView.Adapter {
         notifyDataSetChanged();
     }
 
-    int getStoryListIndex(int position) {
-        return position - position / adInterval - 1 + (position % adInterval == 0 ? 1 : 0);
+    /**
+     * Offset for an ads to start with.
+     * i.e. Setting this to 5, ads will start
+     * only after the 5th item
+     */
+    void setAdOffset(int adOffset) {
+        this.adOffset = adOffset;
     }
 
-    public static class RecyclerViewHolder extends RecyclerView.ViewHolder {
-        public RecyclerViewHolder(View itemView) {
-            super(itemView);
+    /**
+     * Position interval for ads to show.
+     * i.e. By setting this to 5, ads will be shown
+     * every 5th position, after the offset in
+     * the beginning
+     */
+    void setAdInterval(int adInterval) {
+        this.adInterval = adInterval;
+    }
+
+    /**
+     * Translate the list position to the
+     * actual position in the story list.
+     */
+    int getStoryListIndex(int position) {
+        if (position < adOffset) {
+            return position;
+        } else {
+            int offset = (position + adOffset - 1) / adInterval;
+            return position - offset;
         }
     }
 }
