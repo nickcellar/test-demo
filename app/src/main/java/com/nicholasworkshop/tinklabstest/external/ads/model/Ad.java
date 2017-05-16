@@ -1,11 +1,13 @@
 package com.nicholasworkshop.tinklabstest.external.ads.model;
 
 import lombok.Data;
+import lombok.experimental.Builder;
 
 /**
  * Created by nicholas.wong on 2017/05/15.
  */
 @Data
+@Builder
 public class Ad {
 
     private String imageUrl;
