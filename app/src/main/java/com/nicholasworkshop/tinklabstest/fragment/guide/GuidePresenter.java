@@ -41,7 +41,7 @@ class GuidePresenter {
                 .storyRequests()
                 .filter(integer -> !storyFetching)
                 .doOnNext(stories -> storyFetching = true)
-                .flatMap(firstVisibleItemPosition -> guideModel.storyList(firstVisibleItemPosition + FETCH_STORY_COUNT))
+                .flatMap(lastPosition -> guideModel.storyList(lastPosition + FETCH_STORY_COUNT))
                 .doOnNext(stories -> storyFetching = false)
                 .subscribe(guideView::setStoryList);
         guideModel
