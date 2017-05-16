@@ -32,6 +32,7 @@ class GuidePresenter {
     }
 
     void viewCreated(View view, @Nullable Bundle savedInstanceState) {
+        guideView.viewCreated(view);
         guideModel
                 .storyList(INITIAL_STORY_COUNT)
                 .doOnNext(stories -> storyFetching = false)

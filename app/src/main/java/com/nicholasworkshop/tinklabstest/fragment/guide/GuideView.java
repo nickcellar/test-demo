@@ -30,8 +30,7 @@ public class GuideView {
     private final Subject<Integer> storyRequestSubject = BehaviorSubject.create();
 
     @BindView(R.id.stories) RecyclerView storiesRecyclerView;
-
-    private LinearLayoutManager layoutManager;
+    LinearLayoutManager layoutManager;
 
     @Inject
     GuideView(GuideRecyclerViewAdapter guideRecyclerViewAdapter) {
@@ -41,12 +40,15 @@ public class GuideView {
     View createView(LayoutInflater inflater, ViewGroup container) {
         View view = inflater.inflate(R.layout.fragment_guide, container, false);
         ButterKnife.bind(this, view);
-        layoutManager = new LinearLayoutManager(container.getContext());
+        layoutManager = new LinearLayoutManager(view.getContext());
+        return view;
+    }
+
+    void viewCreated(View view) {
         storiesRecyclerView.setHasFixedSize(true);
         storiesRecyclerView.setLayoutManager(layoutManager);
         storiesRecyclerView.setAdapter(guideRecyclerViewAdapter);
         storiesRecyclerView.addOnScrollListener(new GuideInfiniteScrollListener(1, layoutManager));
-        return view;
     }
 
     void setStoryList(List<Story> storyList) {
@@ -61,7 +63,7 @@ public class GuideView {
         return storyRequestSubject;
     }
 
-    private class GuideInfiniteScrollListener extends InfiniteScrollListener {
+    class GuideInfiniteScrollListener extends InfiniteScrollListener {
 
         GuideInfiniteScrollListener(int maxItemsPerRequest, LinearLayoutManager layoutManager) {
             super(maxItemsPerRequest, layoutManager);
