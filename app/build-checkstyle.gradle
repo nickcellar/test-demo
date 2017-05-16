@@ -1,0 +1,23 @@
+/**
+ * Created by Nicholas Wong <nickwph@gmail.com>.
+ * Github Gist: https://gist.github.com/nickwph/de0dd805e29fe3bcba476b6126459259
+ * Gradle build file to set up variables for checkstyle.
+ */
+apply plugin: 'checkstyle'
+
+checkstyle {
+    configFile file('checkstyle-config.xml')
+    showViolations true
+    ignoreFailures true
+}
+
+android.applicationVariants.all { variant ->
+    def name = variant.buildType.name
+    def checkstyle = project.tasks.create "checkstyle${name.capitalize()}", Checkstyle
+    checkstyle.dependsOn variant.javaCompile
+    checkstyle.source variant.javaCompile.source
+    checkstyle.classpath = project.fileTree(variant.javaCompile.destinationDir)
+    checkstyle.exclude('**/BuildConfig.java')
+    checkstyle.exclude('**/R.java')
+    project.tasks.getByName("check").dependsOn checkstyle
+}
