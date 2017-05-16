@@ -1,0 +1,62 @@
+/**
+ * Created by Nicholas Wong <nickwph@gmail.com>.
+ * Github Gist: https://gist.github.com/nickwph/8e757fa1fff9c52a39a6a5a485fdc900
+ * Gradle build file to set up variables for findbugs.
+ * The following tasks will be created in normal circumstance.
+ *
+ * - Create FindBugs XML Report
+ *     findbugsDebug
+ *     findbugsRelease
+ *
+ * - Create FindBugs HTML Report
+ *     findbugsHtmlDebug
+ *     findbugsHtmlRelease
+ *
+ * - Open FindBugs HTML Report in Mac OSX
+ *     openFindbugsHtmlDebug
+ *     openFindbugsHtmlRelease
+ */
+apply plugin: 'findbugs'
+
+findbugs.toolVersion = "3.0.1"
+
+afterEvaluate {
+    android.buildTypes.all { buildType ->
+        def variant = buildType.name
+        def variantCapitalized = variant.capitalize()
+
+        def task = tasks.create(name: "findbugs${variantCapitalized}", type: FindBugs) {
+            ignoreFailures = true
+            classes = fileTree(
+                    dir: "${buildDir}/intermediates/classes/${variant}",
+                    excludes: ['**/R.class',
+                               '**/R$*.class',
+                               '**/*$ViewInjector*.*',
+                               '**/BuildConfig.*',
+                               '**/Manifest*.*']
+            )
+            source = android.sourceSets.main.java.srcDirs
+            classpath = files()
+            effort = 'max'
+            reports.xml.destination "${buildDir}/outputs/findbugs-results-${variant}.xml"
+        }
+
+        tasks.create(name: "findbugsHtml${variantCapitalized}", type: FindBugs) {
+            ignoreFailures = task.ignoreFailures
+            classes = task.classes
+            source = task.source
+            classpath = task.classpath
+            effort = task.effort
+            reports {
+                xml.enabled false
+                html.enabled true
+                html.destination "${buildDir}/outputs/findbugs-results-${variant}.html"
+            }
+        }
+
+        tasks.create(name: "openFindbugsHtml${variantCapitalized}", type: Exec, dependsOn: "findbugsHtml${variantCapitalized}") {
+            executable 'open'
+            args "${buildDir}/outputs/findbugs-results-${variant}.html"
+        }
+    }
+}
