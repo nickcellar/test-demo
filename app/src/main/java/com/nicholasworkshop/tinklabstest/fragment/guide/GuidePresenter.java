@@ -27,6 +27,10 @@ class GuidePresenter {
         this.guideModel = guideModel;
     }
 
+    void setGuideType(@GuideModule.GuideType int guideType) {
+        guideModel.setGuideType(guideType);
+    }
+
     View createView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         return guideView.createView(inflater, container);
     }

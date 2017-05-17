@@ -19,6 +19,7 @@ public class GuideModel {
 
     private final AdsServiceManager adsServiceManager;
     private final ContentServiceManager contentServiceManager;
+    private int guideType;
 
     @Inject
     GuideModel(AdsServiceManager adsServiceManager, ContentServiceManager contentServiceManager) {
@@ -26,8 +27,20 @@ public class GuideModel {
         this.contentServiceManager = contentServiceManager;
     }
 
+    void setGuideType(int guideType) {
+        this.guideType = guideType;
+    }
+
     Observable<List<Story>> storyList(int count) {
-        return contentServiceManager.getGuide(count);
+        switch (guideType) {
+            case GuideModule.TYPE_CITY:
+                return contentServiceManager.getCityGuide(count);
+            case GuideModule.TYPE_EAT:
+                return contentServiceManager.getEatGuide(count);
+            case GuideModule.TYPE_SHOP:
+                return contentServiceManager.getShopGuide(count);
+        }
+        return null;
     }
 
     Observable<List<Ad>> ads() {

@@ -18,10 +18,16 @@ import javax.inject.Inject;
 
 public class GuideFragment extends Fragment {
 
+    private static final String ARG_GUIDE_TYPE = "ARG_GUIDE_TYPE";
+
     @Inject GuidePresenter guidePresenter;
 
-    public static GuideFragment newInstance() {
-        return new GuideFragment();
+    public static GuideFragment newInstance(@GuideModule.GuideType int guideType) {
+        GuideFragment fragment = new GuideFragment();
+        Bundle args = new Bundle();
+        args.putInt(ARG_GUIDE_TYPE, guideType);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
@@ -29,6 +35,7 @@ public class GuideFragment extends Fragment {
         super.onCreate(savedInstanceState);
         MainComponent component = ((MainApplication) this.getActivity().getApplication()).getComponent();
         component.inject(this);
+        guidePresenter.setGuideType(getArguments().getInt(ARG_GUIDE_TYPE));
     }
 
     @Nullable
