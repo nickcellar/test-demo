@@ -35,17 +35,17 @@ public class GuideFragment extends Fragment {
         super.onCreate(savedInstanceState);
         MainComponent component = ((MainApplication) this.getActivity().getApplication()).getComponent();
         component.inject(this);
-        guidePresenter.setGuideType(getArguments().getInt(ARG_GUIDE_TYPE));
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        return guidePresenter.createView(inflater, container, savedInstanceState);
+        return guidePresenter.createView(inflater, container);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        guidePresenter.viewCreated(view, savedInstanceState);
+        @GuideModule.GuideType int guideType = getArguments().getInt(ARG_GUIDE_TYPE);
+        guidePresenter.viewCreated(view, guideType);
     }
 }

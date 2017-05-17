@@ -36,6 +36,9 @@ public class GuideRecyclerViewAdapter extends RecyclerView.Adapter {
         this.layoutInflater = layoutInflater;
     }
 
+    /**
+     * Only 2 types: ad or story
+     */
     @Override
     public int getItemViewType(int position) {
         return (position - adOffset) % adInterval == 0 ? TYPE_AD : TYPE_STORY;
@@ -77,6 +80,9 @@ public class GuideRecyclerViewAdapter extends RecyclerView.Adapter {
         throw new RuntimeException();
     }
 
+    /**
+     * Total number of ads and stories
+     */
     @Override
     public int getItemCount() {
         int storyCount = storyList != null ? storyList.size() : 0;

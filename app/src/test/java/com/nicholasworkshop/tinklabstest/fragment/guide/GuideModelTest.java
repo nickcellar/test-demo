@@ -15,7 +15,6 @@ import static org.mockito.MockitoAnnotations.initMocks;
  */
 public class GuideModelTest {
 
-
     @Mock AdsServiceManager adsServiceManager;
     @Mock ContentServiceManager contentServiceManager;
 
@@ -28,9 +27,21 @@ public class GuideModelTest {
     }
 
     @Test
-    public void storyList() throws Exception {
-        guideModel.storyList(10);
+    public void storyList_getCityGuide() throws Exception {
+        guideModel.storyList(GuideModule.TYPE_CITY, 10);
         verify(contentServiceManager).getCityGuide(10);
+    }
+
+    @Test
+    public void storyList_getShopGuide() throws Exception {
+        guideModel.storyList(GuideModule.TYPE_SHOP, 10);
+        verify(contentServiceManager).getShopGuide(10);
+    }
+
+    @Test
+    public void storyList_getEatGuide() throws Exception {
+        guideModel.storyList(GuideModule.TYPE_EAT, 10);
+        verify(contentServiceManager).getEatGuide(10);
     }
 
     @Test
