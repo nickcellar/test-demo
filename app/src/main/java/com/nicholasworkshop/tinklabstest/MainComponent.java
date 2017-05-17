@@ -3,7 +3,6 @@ package com.nicholasworkshop.tinklabstest;
 import com.nicholasworkshop.tinklabstest.activity.MainActivity;
 import com.nicholasworkshop.tinklabstest.external.ads.AdsServiceModule;
 import com.nicholasworkshop.tinklabstest.external.content.ContentServiceModule;
-import com.nicholasworkshop.tinklabstest.fragment.PlaceholderFragment;
 import com.nicholasworkshop.tinklabstest.fragment.guide.GuideFragment;
 import com.nicholasworkshop.tinklabstest.widget.AdItemView;
 import com.nicholasworkshop.tinklabstest.widget.StoryItemView;
@@ -24,8 +23,6 @@ import dagger.Component;
 public interface MainComponent {
 
     void inject(MainActivity mainActivity);
-
-    void inject(PlaceholderFragment placeholderFragment);
 
     void inject(GuideFragment guideFragment);
 
