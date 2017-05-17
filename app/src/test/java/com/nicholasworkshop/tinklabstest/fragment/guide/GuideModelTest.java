@@ -30,7 +30,7 @@ public class GuideModelTest {
     @Test
     public void storyList() throws Exception {
         guideModel.storyList(10);
-        verify(contentServiceManager).getGuide(10);
+        verify(contentServiceManager).getCityGuide(10);
     }
 
     @Test

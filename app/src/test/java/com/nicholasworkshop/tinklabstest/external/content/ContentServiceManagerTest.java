@@ -9,11 +9,7 @@ import org.mockito.Mock;
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.Scheduler;
-import io.reactivex.android.plugins.RxAndroidPlugins;
-import io.reactivex.internal.schedulers.ExecutorScheduler;
 import io.reactivex.observers.TestObserver;
-import io.reactivex.plugins.RxJavaPlugins;
 
 import static com.nicholasworkshop.tinklabstest.TestUtilities.initRxSchedulers;
 import static com.nicholasworkshop.tinklabstest.external.content.model.StoryFaker.fakeStoryList;
@@ -40,11 +36,39 @@ public class ContentServiceManagerTest {
     }
 
     @Test
-    public void getGuide() throws Exception {
+    public void getCityGuide() throws Exception {
         int count = 10;
         List<Story> storyList = fakeStoryList(100);
-        when(contentService.getGuide()).thenReturn(Observable.just(storyList));
-        contentServiceManager.getGuide(count).subscribe(testObserver);
+        when(contentService.getCityGuide()).thenReturn(Observable.just(storyList));
+        contentServiceManager.getCityGuide(count).subscribe(testObserver);
+        testObserver.assertValue(returnedStoryList -> {
+            assertEquals(count, returnedStoryList.size());
+            assertEquals(storyList.get(0), returnedStoryList.get(0));
+            assertEquals(storyList.get(count - 1), returnedStoryList.get(count - 1));
+            return true;
+        });
+    }
+
+    @Test
+    public void getEatGuide() throws Exception {
+        int count = 10;
+        List<Story> storyList = fakeStoryList(100);
+        when(contentService.getEatGuide()).thenReturn(Observable.just(storyList));
+        contentServiceManager.getEatGuide(count).subscribe(testObserver);
+        testObserver.assertValue(returnedStoryList -> {
+            assertEquals(count, returnedStoryList.size());
+            assertEquals(storyList.get(0), returnedStoryList.get(0));
+            assertEquals(storyList.get(count - 1), returnedStoryList.get(count - 1));
+            return true;
+        });
+    }
+
+    @Test
+    public void getShopGuide() throws Exception {
+        int count = 10;
+        List<Story> storyList = fakeStoryList(100);
+        when(contentService.getShopGuide()).thenReturn(Observable.just(storyList));
+        contentServiceManager.getShopGuide(count).subscribe(testObserver);
         testObserver.assertValue(returnedStoryList -> {
             assertEquals(count, returnedStoryList.size());
             assertEquals(storyList.get(0), returnedStoryList.get(0));

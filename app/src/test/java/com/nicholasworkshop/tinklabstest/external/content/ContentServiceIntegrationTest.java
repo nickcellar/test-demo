@@ -23,8 +23,20 @@ public class ContentServiceIntegrationTest {
     }
 
     @Test
-    public void getGuide() throws Exception {
-        List<Story> storyList = contentService.getGuide().blockingFirst();
+    public void getCityGuide() throws Exception {
+        List<Story> storyList = contentService.getCityGuide().blockingFirst();
         assertEquals(102, storyList.size());
+    }
+
+    @Test
+    public void getShopGuide() throws Exception {
+        List<Story> storyList = contentService.getShopGuide().blockingFirst();
+        assertEquals(100, storyList.size());
+    }
+
+    @Test
+    public void getEatGuide() throws Exception {
+        List<Story> storyList = contentService.getEatGuide().blockingFirst();
+        assertEquals(100, storyList.size());
     }
 }

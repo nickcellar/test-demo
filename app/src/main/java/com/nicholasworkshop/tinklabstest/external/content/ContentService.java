@@ -12,6 +12,12 @@ import retrofit2.http.GET;
  */
 interface ContentService {
 
-    @GET("guide.json")
-    Observable<List<Story>> getGuide();
+    @GET("city.json")
+    Observable<List<Story>> getCityGuide();
+
+    @GET("shop.json")
+    Observable<List<Story>> getShopGuide();
+
+    @GET("eat.json")
+    Observable<List<Story>> getEatGuide();
 }

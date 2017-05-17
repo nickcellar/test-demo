@@ -25,6 +25,6 @@ public class AdsServiceIntegrationTest {
     @Test
     public void get() throws Exception {
         List<Ad> adList = adsService.get().blockingFirst();
-        assertEquals(1, adList.size());
+        assertEquals(2, adList.size());
     }
 }

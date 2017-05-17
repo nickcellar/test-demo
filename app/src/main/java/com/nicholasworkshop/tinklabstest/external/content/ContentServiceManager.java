@@ -24,9 +24,27 @@ public class ContentServiceManager {
         this.contentService = contentService;
     }
 
-    public Observable<List<Story>> getGuide(int count) {
+    public Observable<List<Story>> getCityGuide(int count) {
         return contentService
-                .getGuide()
+                .getCityGuide()
+                .cache()
+                .map(stories -> stories.subList(0, Math.min(stories.size(), count)))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<List<Story>> getEatGuide(int count) {
+        return contentService
+                .getEatGuide()
+                .cache()
+                .map(stories -> stories.subList(0, Math.min(stories.size(), count)))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<List<Story>> getShopGuide(int count) {
+        return contentService
+                .getShopGuide()
                 .cache()
                 .map(stories -> stories.subList(0, Math.min(stories.size(), count)))
                 .subscribeOn(Schedulers.io())
