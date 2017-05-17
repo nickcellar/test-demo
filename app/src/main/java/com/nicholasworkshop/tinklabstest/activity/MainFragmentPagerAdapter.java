@@ -1,16 +1,21 @@
 package com.nicholasworkshop.tinklabstest.activity;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.nicholasworkshop.tinklabstest.R;
 import com.nicholasworkshop.tinklabstest.fragment.guide.GuideFragment;
 import com.nicholasworkshop.tinklabstest.fragment.guide.GuideModule;
 
 class MainFragmentPagerAdapter extends FragmentPagerAdapter {
 
-    MainFragmentPagerAdapter(FragmentManager fragmentManager) {
+    private final Context context;
+
+    MainFragmentPagerAdapter(Context context, FragmentManager fragmentManager) {
         super(fragmentManager);
+        this.context = context;
     }
 
     @Override
@@ -35,11 +40,11 @@ class MainFragmentPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-                return "CITY GUIDE";
+                return context.getString(R.string.main_tab_city);
             case 1:
-                return "SHOP";
+                return context.getString(R.string.main_tab_shop);
             case 2:
-                return "EAT";
+                return context.getString(R.string.main_tab_eat);
         }
         return null;
     }

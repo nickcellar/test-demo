@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        viewPager.setAdapter(new MainFragmentPagerAdapter(getSupportFragmentManager()));
+        viewPager.setAdapter(new MainFragmentPagerAdapter(this, getSupportFragmentManager()));
         tabLayout.setupWithViewPager(viewPager);
     }
 }
