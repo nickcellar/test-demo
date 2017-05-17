@@ -38,7 +38,7 @@ public class GuideRecyclerViewAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemViewType(int position) {
-        return position % adInterval == adOffset ? TYPE_AD : TYPE_STORY;
+        return (position - adOffset) % adInterval == 0 ? TYPE_AD : TYPE_STORY;
     }
 
     @Override
@@ -121,8 +121,7 @@ public class GuideRecyclerViewAdapter extends RecyclerView.Adapter {
         if (position < adOffset) {
             return position;
         } else {
-            int offset = (position + adOffset - 1) / adInterval;
-            return position - offset;
+            return position - ((position - adOffset) / adInterval) - 1;
         }
     }
 }

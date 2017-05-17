@@ -51,7 +51,6 @@ public class GuideRecyclerViewAdapterTest {
     public void setUp() throws Exception {
         initMocks(this);
         guideRecyclerViewAdapter = new GuideRecyclerViewAdapter(layoutInflater);
-
     }
 
     @Test
@@ -69,6 +68,26 @@ public class GuideRecyclerViewAdapterTest {
         assertEquals(TYPE_STORY, guideRecyclerViewAdapter.getItemViewType(13));
         assertEquals(TYPE_AD, guideRecyclerViewAdapter.getItemViewType(20));
         assertEquals(TYPE_STORY, guideRecyclerViewAdapter.getItemViewType(21));
+    }
+
+    @Test
+    public void getItemViewType2() throws Exception {
+        guideRecyclerViewAdapter.setAdOffset(1);
+        guideRecyclerViewAdapter.setAdInterval(5);
+        assertEquals(TYPE_STORY, guideRecyclerViewAdapter.getItemViewType(0));
+        assertEquals(TYPE_AD, guideRecyclerViewAdapter.getItemViewType(1));
+        assertEquals(TYPE_STORY, guideRecyclerViewAdapter.getItemViewType(2));
+        assertEquals(TYPE_STORY, guideRecyclerViewAdapter.getItemViewType(3));
+        assertEquals(TYPE_STORY, guideRecyclerViewAdapter.getItemViewType(4));
+        assertEquals(TYPE_STORY, guideRecyclerViewAdapter.getItemViewType(5));
+        assertEquals(TYPE_AD, guideRecyclerViewAdapter.getItemViewType(6));
+        assertEquals(TYPE_STORY, guideRecyclerViewAdapter.getItemViewType(7));
+        assertEquals(TYPE_STORY, guideRecyclerViewAdapter.getItemViewType(8));
+        assertEquals(TYPE_STORY, guideRecyclerViewAdapter.getItemViewType(9));
+        assertEquals(TYPE_STORY, guideRecyclerViewAdapter.getItemViewType(10));
+        assertEquals(TYPE_AD, guideRecyclerViewAdapter.getItemViewType(11));
+        assertEquals(TYPE_STORY, guideRecyclerViewAdapter.getItemViewType(20));
+        assertEquals(TYPE_AD, guideRecyclerViewAdapter.getItemViewType(21));
     }
 
     @Test
@@ -165,5 +184,26 @@ public class GuideRecyclerViewAdapterTest {
         assertEquals(10, guideRecyclerViewAdapter.getStoryListIndex(11));
         assertEquals(11, guideRecyclerViewAdapter.getStoryListIndex(13));
         assertEquals(18, guideRecyclerViewAdapter.getStoryListIndex(21));
+    }
+
+    @Test
+    public void getStoryListIndex2() throws Exception {
+        guideRecyclerViewAdapter.setAdOffset(1);
+        guideRecyclerViewAdapter.setAdInterval(5);
+        assertEquals(0, guideRecyclerViewAdapter.getStoryListIndex(0));
+        assertEquals(1, guideRecyclerViewAdapter.getStoryListIndex(2));
+        assertEquals(2, guideRecyclerViewAdapter.getStoryListIndex(3));
+        assertEquals(3, guideRecyclerViewAdapter.getStoryListIndex(4));
+        assertEquals(4, guideRecyclerViewAdapter.getStoryListIndex(5));
+        assertEquals(5, guideRecyclerViewAdapter.getStoryListIndex(7));
+        assertEquals(6, guideRecyclerViewAdapter.getStoryListIndex(8));
+        assertEquals(7, guideRecyclerViewAdapter.getStoryListIndex(9));
+        assertEquals(8, guideRecyclerViewAdapter.getStoryListIndex(10));
+        assertEquals(9, guideRecyclerViewAdapter.getStoryListIndex(12));
+        assertEquals(10, guideRecyclerViewAdapter.getStoryListIndex(13));
+        assertEquals(11, guideRecyclerViewAdapter.getStoryListIndex(14));
+        assertEquals(12, guideRecyclerViewAdapter.getStoryListIndex(15));
+        assertEquals(13, guideRecyclerViewAdapter.getStoryListIndex(17));
+        assertEquals(16, guideRecyclerViewAdapter.getStoryListIndex(21));
     }
 }
