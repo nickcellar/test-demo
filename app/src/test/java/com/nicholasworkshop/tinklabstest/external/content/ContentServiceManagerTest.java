@@ -37,8 +37,8 @@ public class ContentServiceManagerTest {
 
     @Test
     public void getCityGuide() throws Exception {
-        int count = 10;
-        List<Story> storyList = fakeStoryList(100);
+        int count = 5;
+        List<Story> storyList = fakeStoryList(10);
         when(contentService.getCityGuide()).thenReturn(Observable.just(storyList));
         contentServiceManager.getCityGuide(count).subscribe(testObserver);
         testObserver.assertValue(returnedStoryList -> {
@@ -51,8 +51,8 @@ public class ContentServiceManagerTest {
 
     @Test
     public void getEatGuide() throws Exception {
-        int count = 10;
-        List<Story> storyList = fakeStoryList(100);
+        int count = 5;
+        List<Story> storyList = fakeStoryList(10);
         when(contentService.getEatGuide()).thenReturn(Observable.just(storyList));
         contentServiceManager.getEatGuide(count).subscribe(testObserver);
         testObserver.assertValue(returnedStoryList -> {
@@ -65,8 +65,8 @@ public class ContentServiceManagerTest {
 
     @Test
     public void getShopGuide() throws Exception {
-        int count = 10;
-        List<Story> storyList = fakeStoryList(100);
+        int count = 5;
+        List<Story> storyList = fakeStoryList(10);
         when(contentService.getShopGuide()).thenReturn(Observable.just(storyList));
         contentServiceManager.getShopGuide(count).subscribe(testObserver);
         testObserver.assertValue(returnedStoryList -> {

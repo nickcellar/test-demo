@@ -111,7 +111,7 @@ public class GuideRecyclerViewAdapterTest {
 
     @Test
     public void onBindViewHolder_whenBindingStoryView() throws Exception {
-        List<Story> storyList = fakeStoryList(200);
+        List<Story> storyList = fakeStoryList(10);
         RecyclerViewHolder holder = new RecyclerViewHolder(storyItemView);
         guideRecyclerViewAdapter.setAdOffset(4);
         guideRecyclerViewAdapter.setAdInterval(8);
@@ -149,21 +149,21 @@ public class GuideRecyclerViewAdapterTest {
     public void getItemCount() throws Exception {
         guideRecyclerViewAdapter.setAdOffset(4);
         guideRecyclerViewAdapter.setAdInterval(8);
-        guideRecyclerViewAdapter.setStoryList(fakeStoryList(200));
-        assertEquals(225, guideRecyclerViewAdapter.getItemCount());
+        guideRecyclerViewAdapter.setStoryList(fakeStoryList(10));
+        assertEquals(11, guideRecyclerViewAdapter.getItemCount());
     }
 
     @Test
     public void setStoryList() throws Exception {
         guideRecyclerViewAdapter.registerAdapterDataObserver(observer);
-        guideRecyclerViewAdapter.setStoryList(fakeStoryList(200));
+        guideRecyclerViewAdapter.setStoryList(fakeStoryList(10));
         verify(observer).onChanged();
     }
 
     @Test
     public void setAdList() throws Exception {
         guideRecyclerViewAdapter.registerAdapterDataObserver(observer);
-        guideRecyclerViewAdapter.setAdList(fakeAdList(200));
+        guideRecyclerViewAdapter.setAdList(fakeAdList(10));
         verify(observer).onChanged();
     }
 

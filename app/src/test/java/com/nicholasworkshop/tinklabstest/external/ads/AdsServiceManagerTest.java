@@ -38,7 +38,7 @@ public class AdsServiceManagerTest {
 
     @Test
     public void get() throws Exception {
-        List<Ad> storyList = fakeAdList(100);
+        List<Ad> storyList = fakeAdList(10);
         when(adsService.get()).thenReturn(Observable.just(storyList));
         adsServiceManager.get().subscribe(testObserver);
         testObserver.assertValue(returnedStoryList -> {
