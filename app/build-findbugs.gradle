@@ -18,7 +18,11 @@
  */
 apply plugin: 'findbugs'
 
-findbugs.toolVersion = "3.0.1"
+findbugs {
+    toolVersion = "3.0.1"
+    ignoreFailures = true
+}
+
 
 afterEvaluate {
     android.buildTypes.all { buildType ->

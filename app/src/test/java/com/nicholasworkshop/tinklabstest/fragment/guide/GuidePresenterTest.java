@@ -50,7 +50,7 @@ public class GuidePresenterTest {
     @Test
     @SuppressWarnings("WrongConstant")
     public void viewCreated() throws Exception {
-        guidePresenter.viewCreated(viewGroup, GUIDE_TYPE);
+        guidePresenter.viewCreated(GUIDE_TYPE);
         verify(guideView).viewCreated(viewGroup);
         verify(guideModel).storyList(eq(GUIDE_TYPE), anyInt());
         verify(guideView).storyRequests();

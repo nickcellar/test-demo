@@ -8,7 +8,7 @@
     android:padding="16dp">
 
     <ImageView
-        android:id="@+id/feature"
+        android:id="@+id/featureView"
         android:layout_width="120dp"
         android:layout_height="90dp"
         android:scaleType="centerCrop"
@@ -22,14 +22,14 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/titleView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#000000"
             tools:text="Title"/>
 
         <TextView
-            android:id="@+id/summary"
+            android:id="@+id/summaryView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
