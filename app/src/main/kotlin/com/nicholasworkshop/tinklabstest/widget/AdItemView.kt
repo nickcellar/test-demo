@@ -5,17 +5,17 @@ import android.content.Intent
 import android.net.Uri
 import android.util.AttributeSet
 import android.widget.FrameLayout
+import android.widget.ImageView
 import com.bumptech.glide.RequestManager
 import com.nicholasworkshop.tinklabstest.MainApplication
 import kotlinx.android.synthetic.main.view_item_ad.view.*
-import kotlinx.android.synthetic.main.view_item_story.view.*
 import javax.inject.Inject
 
 class AdItemView : FrameLayout {
 
-    @Inject
-    lateinit var requestManager: RequestManager
+    @Inject lateinit var requestManager: RequestManager
 
+    var adView: ImageView? = ad_view
     var redirectUrl: String? = null
 
     constructor(context: Context?) : super(context)
@@ -41,11 +41,11 @@ class AdItemView : FrameLayout {
     }
 
     fun setImageUrl(imageUrl: String?) {
-        requestManager.load(imageUrl).into(adView)
+        requestManager.load(imageUrl).into(adView!!)
     }
 
     fun clear() {
-        adView.setImageDrawable(null)
+        adView!!.setImageDrawable(null)
         redirectUrl = null
     }
 }

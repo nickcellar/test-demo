@@ -1,6 +1,7 @@
 package com.nicholasworkshop.tinklabstest.fragment.guide
 
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,12 +21,15 @@ class GuideView @Inject internal constructor(
 
     override lateinit var containerView: View
 
+    lateinit var storiesView: RecyclerView
+    lateinit var layoutManager: LinearLayoutManager
+
     private val storyRequestSubject = BehaviorSubject.create<Int>()
-    private lateinit var layoutManager: LinearLayoutManager
 
     internal fun createView(inflater: LayoutInflater, container: ViewGroup): View {
         containerView = inflater.inflate(R.layout.fragment_guide, container, false)
         layoutManager = LinearLayoutManager(containerView.context)
+        storiesView = stories_view
         return containerView
     }
 
