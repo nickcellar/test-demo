@@ -10,15 +10,22 @@ import javax.inject.Inject
 
 private const val ARG_GUIDE_TYPE = "ARG_GUIDE_TYPE"
 
-fun newGuideFragmentInstance(@GuideType guideType: Int): GuideFragment {
-    val fragment = GuideFragment()
-    val args = Bundle()
-    args.putInt(ARG_GUIDE_TYPE, guideType)
-    fragment.arguments = args
-    return fragment
+enum class GuideType {
+    CITY, SHOP, EAT
 }
 
 class GuideFragment : Fragment() {
+
+    companion object {
+        fun newInstance(guideType: GuideType): GuideFragment {
+            val fragment = GuideFragment()
+            val args = Bundle()
+            args.putInt(ARG_GUIDE_TYPE, guideType.ordinal)
+            fragment.arguments = args
+            return fragment
+        }
+
+    }
 
     @Inject
     internal lateinit var guidePresenter: GuidePresenter
@@ -33,8 +40,7 @@ class GuideFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        @GuideType val guideType = arguments!!.getInt(ARG_GUIDE_TYPE)
+        val guideType = GuideType.values()[arguments!!.getInt(ARG_GUIDE_TYPE)]
         guidePresenter.viewCreated(guideType)
     }
-
 }

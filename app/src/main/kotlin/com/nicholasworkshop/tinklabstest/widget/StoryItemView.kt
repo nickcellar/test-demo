@@ -36,19 +36,4 @@ class StoryItemView: LinearLayout {
     fun setFeatureImageUrl(featureImageUrl: String?) {
         requestManager.load(featureImageUrl).into(featureView!!)
     }
-
-//    var title: String? = null
-//        set(value) {
-//            titleView.text = title
-//        }
-//
-//    var summary: String? = null
-//        set(value) {
-//            summaryView.text = summary
-//        }
-//
-//    var featureImageUrl: String? = null
-//        set(value) {
-//            requestManager.load(featureImageUrl).into(featureView)
-//        }
 }

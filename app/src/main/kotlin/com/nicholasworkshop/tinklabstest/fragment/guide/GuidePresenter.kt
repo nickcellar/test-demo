@@ -22,7 +22,7 @@ internal class GuidePresenter @Inject constructor(
         return guideView.createView(inflater, container)
     }
 
-    fun viewCreated(@GuideType guideType: Int) {
+    fun viewCreated(guideType: GuideType) {
         guideView.viewCreated()
 
         // fetch stories when the app first starts
