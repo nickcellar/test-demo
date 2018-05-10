@@ -35,10 +35,10 @@ class GuideRecyclerViewAdapter @Inject internal constructor(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         if (viewType == TYPE_AD) {
-            return RecyclerViewHolder(layoutInflater.inflate(R.layout.view_item_ad, parent, false))
+            return RecyclerViewHolder(AdItemView(parent.context))
 
         } else if (viewType == TYPE_STORY) {
-            return RecyclerViewHolder(layoutInflater.inflate(R.layout.view_item_story, parent, false))
+            return RecyclerViewHolder(StoryItemView(parent.context))
         }
         throw RuntimeException()
     }

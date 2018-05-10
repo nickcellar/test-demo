@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import com.nhaarman.mockito_kotlin.whenever
 import com.nicholasworkshop.tinklabstest.MainApplication
 import com.nicholasworkshop.tinklabstest.R
@@ -13,21 +14,25 @@ import com.nicholasworkshop.tinklabstest.widget.AdItemView
 import com.nicholasworkshop.tinklabstest.widget.RecyclerViewHolder
 import com.nicholasworkshop.tinklabstest.widget.StoryItemView
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations.initMocks
+import org.mockito.Spy
+import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
 @Config(manifest = Config.NONE, application = MainApplication::class)
 class GuideRecyclerViewAdapterTest {
 
-    @Mock private lateinit var view: View
-    @Mock private lateinit var viewGroup: ViewGroup
+    @Spy private val viewGroup = FrameLayout(RuntimeEnvironment.application)
+
     @Mock private lateinit var adItemView: AdItemView
     @Mock private lateinit var storyItemView: StoryItemView
     @Mock private lateinit var layoutInflater: LayoutInflater
@@ -80,16 +85,16 @@ class GuideRecyclerViewAdapterTest {
 
     @Test
     fun onCreateViewHolder_whenCreatingAd() {
-        whenever(layoutInflater.inflate(R.layout.view_item_ad, viewGroup, false)).thenReturn(view)
         val holder = guideRecyclerViewAdapter.onCreateViewHolder(viewGroup, TYPE_AD)
-        assertEquals(view, holder.itemView)
+        assertNotNull(holder)
+        assertNotNull(holder.itemView)
     }
 
     @Test
     fun onCreateViewHolder_whenCreatingStory() {
-        whenever(layoutInflater.inflate(R.layout.view_item_story, viewGroup, false)).thenReturn(view)
         val holder = guideRecyclerViewAdapter.onCreateViewHolder(viewGroup, TYPE_STORY)
-        assertEquals(view, holder.itemView)
+        assertNotNull(holder)
+        assertNotNull(holder.itemView)
     }
 
     @Test(expected = RuntimeException::class)

@@ -57,7 +57,7 @@ class AdItemViewTest {
         val url = faker.internet().image()
         adItemView.setImageUrl(url)
         verify(requestManager).load(url)
-        verify(requestBuilder).into(adItemView.adView!!)
+        verify(requestBuilder).into(adItemView.adView)
     }
 
     @Test
@@ -65,7 +65,7 @@ class AdItemViewTest {
         adItemView.setImageUrl(faker.internet().image())
         adItemView.redirectUrl = faker.internet().url()
         adItemView.clear()
-        assertNull(adItemView.adView!!.drawable)
+        assertNull(adItemView.adView.drawable)
         verify(adView).setImageDrawable(null)
     }
 
