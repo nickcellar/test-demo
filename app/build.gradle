@@ -93,8 +93,4 @@ dependencies {
     testImplementation "com.nhaarman:mockito-kotlin:1.5.0"
     testImplementation "org.robolectric:robolectric:3.8"
     testImplementation 'com.github.javafaker:javafaker:0.13'
-
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
 }

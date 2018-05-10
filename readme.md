@@ -8,6 +8,11 @@ command lines. However Android Studio may complainthat some class methods are no
 
 https://projectlombok.org/setup/android.html
 
+### Test coverage report in Android Studio
+
+Add -noverify in the VM option for your tests.
+https://github.com/robolectric/robolectric/issues/3023
+
 ### Install Lombok Plugin in Android Studio
 
 You can have Lombok support in Android Studio:
