@@ -1,4 +1,4 @@
-# TinkLabs Tests
+# Test Demo
 
 ## Notice
 
@@ -35,6 +35,3 @@ https://firebase.google.com/docs/reference/rest/database/
 Continuous integration is set up with CircleCI and configuration file is `circle.yml`. It 
 runs code quality tools such as `findbugs`, `jacoco`, `checkstyle` and `lint`. Reports are
 then saved as artifacts.
-
-## Screenshot
-![alt text](https://firebasestorage.googleapis.com/v0/b/tinklabs-test.appspot.com/o/screencap.png?alt=media&token=c2db3835-afb9-441b-b427-e9cb2bdd6a3f)
